@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- launcher_data文件中保存各种元素的具体定义，包括单元格、下方导航、右上角快捷入口等元素，
+     一般把页面公共元素（比如下方导航和右上角快捷入口）单独保存在一个文件中，例如Launcher_data_common.xml，此时LauncherData没有id属性。
+     页面中的其他元素（各单元格元素）按页保存为单独的文件中，例如Launcher_data_page_xx.xml。 -->
+<LauncherData id="app" version="1381735997">
+	<!-- 页面右上角快捷入口，这里只定义本页面特有的快捷入口元素，如果是多个页面公有的元素则定义到launcher_data_common.xml中。 -->
+	<Shortcuts>
+	</Shortcuts>
+
+	<!-- 单元格列表 -->
+	<Elements>
+		<!-- Element表示一个单元格 
+			id：单元格标识，全局唯一，必填
+			canfocus：此单元格是否允许落焦点
+			defaultfocus: 是否为缺省焦点，一个页面只有一个缺省焦点
+			type：必填，单元格元素类型，包括
+				"image":表示一个图片播放框控件。包括播放展示图片，叠加显示文字，点击的跳转地址。如果只定义了文字而没有定义背景图片，则显示为文本控件。image图片播放框会在每组item自动切换图片播放，如果有link标签会链接到link标签所指定的list表示，list标签每个item分组会与image分组相对应。用户操作list标签对应image标签也会做相应的切换；
+				"video":表示一个播放框。包括播放视频加载前的背景图，播放视频地址及点击的跳转地址，video视频框会根据标签里面的auto字段判断是否（true自动切换、false手动切换）在每组item切换视频播放
+				"list":表示一个文字的列表。list列表框用户可以在每组item见切换，list列表框需要与其他类型box配合。一般与image、video这两种类型配合使用。如果有link标签会链接到link标签所关联的box控件。
+				"widget":Android Widget 
+				"custom":自定义元素以兼容容器网页展现，可以作为一个widget动态加载到网页方框内。
+			auto: 当type为video时，包含此属性，表示是否自动切换视频播放，true自动切换、false手动切换
+			link: 表示image和video类型与list类型元素之间的关联关系
+		-->
+		<Element id="1_1" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<!-- 元素名称，作为设计器中元素名称定义，此名称不会在Launcher界面中显示-->
+					<ElementName><![CDATA[01-家庭账单]]></ElementName>
+					<!-- 元素描述。当有值时，对于image类型为叠加在图片下方的文字描述，元素描述值为空时表示不叠加文字显示。 -->
+					<ElementDesc><![CDATA[家庭账单-第三屏]]></ElementDesc>
+					<!-- 本XML定义中所有URL的格式可以是相对路径或绝对路径，包括Img、FocusImg、ContentURL、ActionURL等字段
+						格式如下：
+								a.相对路径，不以http://打头
+									比如： <ContentURL><![CDATA[720p/assets/images/kds_out.png]]></ContentURL>
+									表示相对于Launcher XML所在路径的地址，假设launcher xml所在目录为： http://epgserver.10086.cn/iptvepg/frame6/launcher_720p.xml
+                                    则，上面的地址等价于：http://epgserver.10086.cn/iptvepg/frame6/720p/assets/images/kds_out.png
+								b. 绝对路径，以http://打头，指定EPG地址
+									比如： <ActionURL><![CDATA[http://{epgdomain}/iptvepg/frame6/vodlist.jsp]]></ActionURL>
+									表示Launcher会自动替换{epgdomain}到真实的epg地址，例如登录的时候Launcher获取到epgdomain地址为 10.1.1.234
+									则，上面的地址等价于：http://10.1.1.234/iptvepg/frame6/vodlist.jsp
+								c. 绝对路径，以http://打头，指定第三方服务器地址
+									比如： <ActionURL><![CDATA[http://douban.fm/music]]></ActionURL>
+									指定第三方服务器地址，直接写绝对URL路径即可，url中不包含“{xxx}”这样的部分，Launcher也不会做替换，就直接访问此绝对路径地址。
+						-->
+					<ContentURL><![CDATA[720p/assets/images/grid_01.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<!-- ActionType为 3时为，跳转链接携带的url参数 -->
+						<ActionURL><![CDATA[http://xxx/xxx.jsp]]></ActionURL>
+						<!--其他动作参数-->
+						<Params></Params>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_2" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[02-消息中心]]></ElementName>
+					<ElementDesc><![CDATA[消息中心]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_02.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 4:跳转其他应用  -->
+						<ActionType>4</ActionType>
+						<Params>
+							<Param name="ActionName">com.zte.action.SHOW_USER_MESSAGE</Param>
+						</Params>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_3" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[03-营业厅]]></ElementName>
+					<ElementDesc><![CDATA[网上营业厅]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_03.png]]></ContentURL>
+					<ElementAction>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_4" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[04-应用商店]]></ElementName>
+					<ElementDesc><![CDATA[应用商店]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_04.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 4:跳转其他应用  -->
+						<ActionType>4</ActionType>
+						<Params>
+							<Param name="PackageName">com.zte.appstore</Param>
+							<Param name="ClassName">com.zte.appstore.main</Param>
+						</Params>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_5" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[05-本地设置]]></ElementName>
+					<ElementDesc><![CDATA[本地设置]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_05.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 4:跳转其他应用  -->
+						<ActionType>4</ActionType>
+						<Params>
+							<Param name="PackageName">com.zte.newlauncher</Param>
+							<Param name="ClassName">com.zte.newlauncher.settings</Param>
+						</Params>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+
+		<Element id="1_6" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[06-5person]]></ElementName>
+					<ElementDesc><![CDATA[]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_06.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_7" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[07-玩游戏]]></ElementName>
+					<ElementDesc><![CDATA[玩游戏\n游戏大厅]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_07.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_8" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[08-好声音]]></ElementName>
+					<ElementDesc><![CDATA[]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_08.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_9" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[09-教育园地]]></ElementName>
+					<ElementDesc><![CDATA[教育园地]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_09.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_10" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[10-note3]]></ElementName>
+					<ElementDesc><![CDATA[]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_10.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+
+		<Element id="1_11" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[11-TV]]></ElementName>
+					<ElementDesc><![CDATA[影视频道]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_11.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_12" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[12-Game]]></ElementName>
+					<ElementDesc><![CDATA[]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_12.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 4:跳转其他应用  -->
+						<ActionType>4</ActionType>
+						<Params>
+							<Param name="PackageName">com.game.pvz</Param>
+							<Param name="ClassName">com.game.pvz.main</Param>
+						</Params>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_13" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[11-Music]]></ElementName>
+					<ElementDesc><![CDATA[]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_13.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[http://xxx/xxx.jsp]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_14" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[12-EDU]]></ElementName>
+					<ElementDesc><![CDATA[]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_14.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[http://xxx/xxx.jsp]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+		<Element id="1_15" type="image" canfocus="true" >
+			<ElementDatas>
+				<ElementData order="0">
+					<ElementName><![CDATA[11-SHOPPING]]></ElementName>
+					<ElementDesc><![CDATA[]]></ElementDesc>
+					<ContentURL><![CDATA[720p/assets/images/grid_15.png]]></ContentURL>
+					<ElementAction>
+						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
+						<ActionType>3</ActionType>
+						<ActionURL><![CDATA[http://xxxx/xxx.jsp]]></ActionURL>
+					</ElementAction>
+				</ElementData>
+			</ElementDatas>
+		</Element>
+	</Elements>
+</LauncherData>

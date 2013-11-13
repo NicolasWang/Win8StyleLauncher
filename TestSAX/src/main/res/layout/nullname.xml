@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="640px"
+    android:layout_height="100px"
+    android:background="#ffffffff"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="320px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:scrollX="100px"
+        android:background="#ffff0000"
+        android:text="this is a test for view111" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="320px"
+        android:layout_height="40px"
+        android:gravity="center"
+        android:background="#ff0000ff"
+        android:text="this is a test for view222">
+
+    </TextView>
+</LinearLayout>

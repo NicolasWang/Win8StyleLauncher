@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LauncherLayout version="1381735997">
+	<!-- Launcher公共定义 -->
+	<PageCommon>
+		<!--页面背景图，每个页面可以独立设置不同背景-->
+		<DefaultBackground><![CDATA[720p/assets/images/bg_img.png]]></DefaultBackground>
+		<!-- 注：Launcher界面下方的页面导航条，不需要特别定义，自动根据Page列表和id生成列表和当前高亮 -->
+		<!-- 文本式导航栏中文本标签高亮选中时的背景图片 -->
+		<FocusNavBgImg><![CDATA[720p/assets/images/navmenu_onbg.png]]></FocusNavBgImg>
+	</PageCommon>
+	<!-- MaxPageNumber：配置的最大栏目页数，从0开始，如配置栏目页数超出该值，取前MaxPageNumber个PageNode展示 -->
+	<PageList MaxPageNumber="3">
+		<!-- id：页面唯一标识，不允许两个页面出现相同ID。可用于作为定义页面跳转时的标识；
+			 order：页面排序页码，从0开始，必填，数字越小就排在越前；
+			 PageName：页面名称；  -->
+		<Page id="myhome" order="0" width="5" height="3">
+			<PageName><![CDATA[我的家庭]]></PageName>
+			<!-- 页面自定义的背景 -->
+			<PageBackground><![CDATA[720p/assets/images/bg_img.png]]></PageBackground>
+			<!-- 页面右上角快捷入口 -->
+			<Shortcuts>
+				<Shortcut id="nav_user_login" type="NAV_USER_LOGIN"/>
+				<Shortcut id="nav_user_message" type="NAV_USER_MESSAGE"/>
+				<Shortcut id="nav_clock_weather" type="NAV_CLOCK_WEATHER"/>
+				<Shortcut id="nav_wifi" type="NAV_SHOW_WIFI"/>
+			</Shortcuts>
+			<!-- 页面元素列表 -->
+			<Elements>
+				<!-- 单元格列表，单元格是以1x1的单元格为基础定义。大小可以自由组合。 -->
+				<Element id="1_1" type="image" left="1" top="1" width="1" height="1" />
+				<Element id="1_2" type="image" left="2" top="1" width="1" height="1" />
+				<Element id="1_3" type="image" left="3" top="1" width="1" height="1" />
+				<Element id="1_4" type="image" left="4" top="1" width="1" height="1" />
+				<Element id="1_5" type="image" left="5" top="1" width="1" height="1" />
+				<Element id="1_6" type="image" left="1" top="2" width="1" height="1" />
+				<Element id="1_7" type="image" left="2" top="2" width="1" height="1" />
+				<Element id="1_8" type="image" left="3" top="2" width="1" height="1" />
+				<Element id="1_9" type="image" left="4" top="2" width="1" height="1" />
+				<Element id="1_10" type="image" left="5" top="2" width="1" height="1" />
+				<Element id="1_11" type="image" left="1" top="3" width="1" height="1" />
+				<Element id="1_12" type="image" left="2" top="3" width="1" height="1" />
+				<Element id="1_13" type="image" left="3" top="3" width="1" height="1" />
+				<Element id="1_14" type="image" left="4" top="3" width="1" height="1" />
+				<Element id="1_15" type="image" left="5" top="3" width="1" height="1" />
+			</Elements>
+		</Page>
+		<Page id="movie" order="1" width="5" height="3">
+			<PageName><![CDATA[影视剧]]></PageName>
+			<!-- 页面自定义的背景 -->
+			<PageBackground><![CDATA[720p/assets/images/bg_img.png]]></PageBackground>
+			<!-- 页面右上角快捷入口 -->
+			<Shortcuts>
+				<Shortcut id="nav_user_login" type="NAV_USER_LOGIN"/>
+				<Shortcut id="nav_user_message" type="NAV_USER_MESSAGE"/>
+				<Shortcut id="nav_clock_weather" type="NAV_CLOCK_WEATHER"/>
+				<Shortcut id="nav_wifi" type="NAV_SHOW_WIFI"/>
+			</Shortcuts>
+			<!-- 页面元素列表 -->
+			<Elements>
+				<!-- 单元格列表，单元格是以1x1的单元格为基础定义。大小可以自由组合。 -->
+				<Element id="1_1" type="image" left="1" top="1" width="1" height="1" />
+				<Element id="1_2" type="image" left="2" top="1" width="1" height="1" />
+				<Element id="1_3" type="image" left="3" top="1" width="1" height="1" />
+				<Element id="1_4" type="image" left="4" top="1" width="1" height="1" />
+				<Element id="1_5" type="image" left="5" top="1" width="1" height="1" />
+				<Element id="1_6" type="image" left="1" top="2" width="1" height="1" />
+				<Element id="1_7" type="image" left="2" top="2" width="1" height="1" />
+				<Element id="1_8" type="image" left="3" top="2" width="1" height="1" />
+				<Element id="1_9" type="image" left="4" top="2" width="1" height="1" />
+				<Element id="1_10" type="image" left="5" top="2" width="1" height="1" />
+				<Element id="1_11" type="image" left="1" top="3" width="1" height="1" />
+				<Element id="1_12" type="image" left="2" top="3" width="1" height="1" />
+				<Element id="1_13" type="image" left="3" top="3" width="1" height="1" />
+				<Element id="1_14" type="image" left="4" top="3" width="1" height="1" />
+				<Element id="1_15" type="image" left="5" top="3" width="1" height="1" />
+			</Elements>
+		</Page>
+		<Page id="app" order="2" width="5" height="3">
+			<PageName><![CDATA[应用]]></PageName>
+			<!-- 页面自定义的背景 -->
+			<PageBackground><![CDATA[720p/assets/images/bg_img.png]]></PageBackground>
+			<!-- 页面右上角快捷入口 -->
+			<Shortcuts>
+				<Shortcut id="nav_user_login" type="NAV_USER_LOGIN"/>
+				<Shortcut id="nav_user_message" type="NAV_USER_MESSAGE"/>
+				<Shortcut id="nav_clock_weather" type="NAV_CLOCK_WEATHER"/>
+				<Shortcut id="nav_wifi" type="NAV_SHOW_WIFI"/>
+			</Shortcuts>
+			<!-- 页面元素列表 -->
+			<Elements>
+				<!-- 单元格列表，单元格是以1x1的单元格为基础定义。大小可以自由组合。 -->
+				<Element id="1_1" type="image" left="1" top="1" width="1" height="1" />
+				<Element id="1_2" type="image" left="2" top="1" width="1" height="1" />
+				<Element id="1_3" type="image" left="3" top="1" width="1" height="1" />
+				<Element id="1_4" type="image" left="4" top="1" width="1" height="1" />
+				<Element id="1_5" type="image" left="5" top="1" width="1" height="1" />
+				<Element id="1_6" type="image" left="1" top="2" width="1" height="1" />
+				<Element id="1_7" type="image" left="2" top="2" width="1" height="1" />
+				<Element id="1_8" type="image" left="3" top="2" width="1" height="1" />
+				<Element id="1_9" type="image" left="4" top="2" width="1" height="1" />
+				<Element id="1_10" type="image" left="5" top="2" width="1" height="1" />
+				<Element id="1_11" type="image" left="1" top="3" width="1" height="1" />
+				<Element id="1_12" type="image" left="2" top="3" width="1" height="1" />
+				<Element id="1_13" type="image" left="3" top="3" width="1" height="1" />
+				<Element id="1_14" type="image" left="4" top="3" width="1" height="1" />
+				<Element id="1_15" type="image" left="5" top="3" width="1" height="1" />
+			</Elements>
+		</Page>
+	</PageList>
+</LauncherLayout>

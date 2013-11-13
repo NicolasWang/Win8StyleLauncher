@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Launcher>
+	<!-- Layout定义布局，其属性：version：标识布局的版本，数字越大表示越新，可用Unix时间戳来表示；file：表示layout布局的文件名。-->
+	<Layout version="1376440961" file="launcher_layout.xml"/>
+	<!-- 公共元素描述，例如包括右上角图标元素、页面导航元素、或其他公用元素 -->
+	<CommonData version="1376440961" file="launcher_data_common.xml"/>
+	<!-- Pages定义各页面数据-->
+	<Pages>
+		<!-- Page，其属性：id：页面唯一标识，和launcher_layout.xml中Page的id一致；
+			 version：页面的版本，数字越大表示越新，可用Unix时间戳来表示；
+			 file：表示Page元素的文件名，其中定义了对应页面的所有元素列表。-->
+		<Page id="recommend" version="1376440961" file="launcher_data_page00.xml"/>
+		<Page id="live" version="1376440961" file="launcher_data_page01.xml"/>
+		<Page id="vod01" version="1376440961" file="launcher_data_page02.xml"/>
+	</Pages>
+</Launcher>

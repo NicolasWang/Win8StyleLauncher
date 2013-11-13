@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- launcher_data文件中保存各种元素的具体定义，包括单元格、下方导航、右上角快捷入口等元素，
+     一般把页面公共元素（比如下方导航和右上角快捷入口）单独保存在一个文件中，例如Launcher_data_common.xml，此时LauncherData没有id属性。
+     页面中的其他元素（各单元格元素）按页保存为单独的文件中，例如Launcher_data_page_xx.xml。 -->
+<LauncherData version="1381735997">
+	<!-- Launcher界面下方的页面导航条数据，考虑导航展现一般为图片 -->
+	<!-- type:表示页面导航条的实现方式类型，text表示文本方式，image表示图片方式 -->
+	<Navs type="text">
+		<!-- Nav的id值和对应的Page的id保持一致，导航显示顺序由Page标签的order属性决定 -->
+		<Nav id="myhome">
+			<!-- 当Navs的type为text文本类型时，包含Name标签，表示一个导航标签的显示文本
+				文本标签高亮时显示的背景图片在launcher_layout.xml中PageCommon中FocusNavBgImg标签中定义 -->
+			<Name>我的家庭</Name>
+			<!-- 当Navs的type为image图片类型时，包含Img和FocusImg标签，表示一个导航标签的显示图片 -->
+		</Nav>
+	</Navs>
+	<!-- 页面右上角快捷入口 -->
+	<Shortcuts>
+		<Shortcut id="nav_user_login" type="NAV_USER_LOGIN" canfocus="true" >
+			<Name><![CDATA[用户登录]]></Name>
+			<ElementAction>
+				<!-- 必填 ，触发动作的业务类型 4:跳转其他应用  -->
+				<ActionType>4</ActionType>
+				<Params>
+					<Param name="ActionName">cn.10086.action.HDC_USER_LOGIN</Param>
+				</Params>
+			</ElementAction>
+		</Shortcut>
+		<Shortcut id="nav_user_message" type="NAV_USER_MESSAGE" canfocus="true" >
+			<ElementAction>
+				<!-- 必填 ，触发动作的业务类型 4:跳转其他应用  -->
+				<ActionType>4</ActionType>
+				<Params>
+					<Param name="ActionName">cn.10086.action.HDC_USER_MESSAGE</Param>
+				</Params>
+			</ElementAction>
+		</Shortcut>
+		<Shortcut id="nav_clock_weather" type="NAV_CLOCK_WEATHER" canfocus="false" >
+			<Name><![CDATA[时钟和天气]]></Name>
+		</Shortcut>
+		<Shortcut id="nav_wifi" type="NAV_SHOW_WIFI" canfocus="false" >
+			<Name><![CDATA[WIFI连接状态]]></Name>
+		</Shortcut>
+	</Shortcuts>
+
+	<!-- 单元格列表 -->
+	<Elements>
+	</Elements>
+</LauncherData>
