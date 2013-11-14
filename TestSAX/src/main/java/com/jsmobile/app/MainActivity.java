@@ -21,16 +21,22 @@ import com.jsmobile.data.LauncherPageDataXMLParser;
 import com.jsmobile.data.LauncherTemplateFileConfigs;
 import com.jsmobile.data.LauncherXMLParser;
 import com.jsmobile.data.XMLParser;
+import com.jsmobile.widget.CustomElement;
 import com.jsmobile.widget.ElementLayout;
 import com.jsmobile.widget.ImageElement;
+import com.jsmobile.widget.ListElement;
 import com.jsmobile.widget.Navigator;
 import com.jsmobile.widget.PageContainer;
 import com.jsmobile.widget.PageView;
+import com.jsmobile.widget.VideoElement;
+import com.jsmobile.widget.WidgetElement;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -236,15 +242,30 @@ public class MainActivity extends Activity {
             while(iterator.hasNext()){
                 Map.Entry<String, LauncherLayout.ElementLayoutInfo> elementLayoutInfo = iterator.next();
                 if(elementLayoutInfo.getValue().type.equalsIgnoreCase("image")){
-                    Log.d("wangx", "elementLayoutInfo.getKey=" + elementLayoutInfo.getKey());
-                    if(launcherData.getPageData(id) == null)Log.d("wangx", "launcherData.getPageData is null");
-                    if(launcherData.getPageData(id).getElement(elementLayoutInfo.getKey()) == null)
-                        Log.d("wangx", "launcherData.getPageData.getElement is null");
-                    if(launcherData.getPageData(id).getElement(elementLayoutInfo.getKey()) == null)Log.d("wangx", "xxx is null");
-
                     ImageElement imageElement = new ImageElement(getApplicationContext(), elementLayoutInfo.getValue(),
                             launcherData.getPageData(id).getElement(elementLayoutInfo.getKey()));
+                    imageElement.setTag(elementLayoutInfo.getKey());
                     page.addView(imageElement);
+                } else if(elementLayoutInfo.getValue().type.equalsIgnoreCase("list")){
+                    ListElement listElement = new ListElement(getApplicationContext(), elementLayoutInfo.getValue(),
+                            launcherData.getPageData(id).getElement(elementLayoutInfo.getKey()));
+                    listElement.setTag(elementLayoutInfo.getKey());
+                    page.addView(listElement);
+                } else if(elementLayoutInfo.getValue().type.equalsIgnoreCase("video")){
+                    VideoElement videoElement = new VideoElement(getApplicationContext(), elementLayoutInfo.getValue(),
+                            launcherData.getPageData(id).getElement(elementLayoutInfo.getKey()));
+                    videoElement.setTag(elementLayoutInfo.getKey());
+                    page.addView(videoElement);
+                } else if(elementLayoutInfo.getValue().type.equalsIgnoreCase("widget")){
+                    WidgetElement widgetElement = new WidgetElement(getApplicationContext(), elementLayoutInfo.getValue(),
+                            launcherData.getPageData(id).getElement(elementLayoutInfo.getKey()));
+                    widgetElement.setTag(elementLayoutInfo.getKey());
+                    page.addView(widgetElement);
+                } else if(elementLayoutInfo.getValue().type.equalsIgnoreCase("custom")){
+                    CustomElement customElement = new CustomElement(getApplicationContext(), elementLayoutInfo.getValue(),
+                            launcherData.getPageData(id).getElement(elementLayoutInfo.getKey()));
+                    customElement.setTag(elementLayoutInfo.getKey());
+                    page.addView(customElement);
                 }
             }
 

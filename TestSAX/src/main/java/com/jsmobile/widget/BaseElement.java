@@ -7,6 +7,8 @@ import com.jsmobile.data.Element;
 import com.jsmobile.data.ElementData;
 import com.jsmobile.data.LauncherLayout;
 
+import java.util.List;
+
 /**
  * Created by wangxin on 10/31/13.
  */
@@ -80,6 +82,10 @@ public abstract class BaseElement extends ViewAnimator{
         this.mElement.setCanFocus(mCanFocus);
     }
 
+    public boolean isDefaultFocus(){
+        return mElement.isDefaultFocus();
+    }
+
     public String getType() {
         return mElementLayoutInfo.type;
     }
@@ -90,5 +96,9 @@ public abstract class BaseElement extends ViewAnimator{
 
     public void setElementData(ElementData elementData){
         mElement.addElementData(elementData);
+    }
+
+    public List<ElementData> getAllElementDatas(){
+        return mElement.getAllElementDatas();
     }
 }

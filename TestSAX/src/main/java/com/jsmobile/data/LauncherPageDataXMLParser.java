@@ -51,6 +51,9 @@ public class LauncherPageDataXMLParser extends XMLParser {
             mElement.setId(attributes.getValue("id"));
             mElement.setType(attributes.getValue("type"));
             mElement.setCanFocus(Boolean.valueOf(attributes.getValue("canfocus")));
+            mElement.setDefaultFocus(Boolean.valueOf(attributes.getValue("defaultfocus")));
+            mElement.setAutoPlay(Boolean.valueOf(attributes.getValue("auto")));
+            mElement.setLinkElementId(String.valueOf(attributes.getValue("link")));
         } else if(name.equalsIgnoreCase("ElementData")){
             inTagElementData = true;
             mElementData = new ElementData();

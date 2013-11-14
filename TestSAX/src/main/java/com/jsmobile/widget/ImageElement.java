@@ -2,8 +2,10 @@ package com.jsmobile.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +33,10 @@ public class ImageElement extends BaseElement {
     @Override
     protected void initElement() {
         mRoot = new RelativeLayout(this.getContext());
-        mRoot.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        FrameLayout.LayoutParams fparam = new LayoutParams(getElementWidth()*ElementLayout.DEFAULT_CELL_WIDTH + (getElementWidth()-1)*ElementLayout.DEFAULT_ELEMENT_MARGIN,
+                getElementHeight()*(ElementLayout.DEFAULT_CELL_HEIGHT + ElementLayout.DEFAULT_ELEMENT_MARGIN) - ElementLayout.DEFAULT_ELEMENT_MARGIN);
+        fparam.gravity = Gravity.CENTER;
+        mRoot.setLayoutParams(fparam);
 
         mImage = new ImageView(getContext());
         mImage.setScaleType(ImageView.ScaleType.FIT_XY);//TODO
@@ -75,10 +80,14 @@ public class ImageElement extends BaseElement {
 
         mRoot.addView(mImage);
         mRoot.addView(mText);
+        mRoot.setFocusable(this.isCanFocus());
+        mRoot.setBackgroundResource(R.drawable.imagefocus);
 
         this.addView(mRoot);
-        this.setBackgroundResource(R.drawable.imagefocus);
-        this.setFocusable(this.isCanFocus());
+//        this.setPadding(20,20,20,20);
+        this.setFocusable(false);
+//        this.setBackgroundResource(R.drawable.imagefocus);
+//        this.setFocusable();
     }
 
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 public class ElementLayout extends ViewGroup {
     private int mCellWidth = DEFAULT_CELL_WIDTH;
     private int mCellHeight = DEFAULT_CELL_HEIGHT;
+
     private int mCellMarginH = DEFAULT_ELEMENT_MARGIN;//cell水平空隙大小
     private int mCellMarginV = DEFAULT_ELEMENT_MARGIN;//cell垂直方向空隙大小
 
@@ -70,8 +71,8 @@ public class ElementLayout extends ViewGroup {
                 final LayoutParams lp = (LayoutParams)getChildAt(i).getLayoutParams();
                 int widthNum = lp.elementwidth;
                 int heightNum = lp.elementheight;
-                int widthMS = MeasureSpec.makeMeasureSpec(mCellWidth * widthNum + (widthNum-1)*mCellMarginH, MeasureSpec.EXACTLY);
-                int heightMS = MeasureSpec.makeMeasureSpec(mCellHeight * heightNum + (heightNum-1)*mCellMarginV, MeasureSpec.EXACTLY);
+                int widthMS = MeasureSpec.makeMeasureSpec(mCellWidth * widthNum + (widthNum+1)*mCellMarginH, MeasureSpec.EXACTLY);
+                int heightMS = MeasureSpec.makeMeasureSpec(mCellHeight * heightNum + (heightNum+1)*mCellMarginV, MeasureSpec.EXACTLY);
                 getChildAt(i).measure(widthMS, heightMS);
             }
         }
@@ -88,8 +89,8 @@ public class ElementLayout extends ViewGroup {
                 final LayoutParams lp = (LayoutParams)getChildAt(i).getLayoutParams();
                 int childLeft = getPaddingLeft() + (lp.elementleft - 1)*mCellWidth + (lp.elementleft - 1)*mCellMarginH;
                 int childTop = getPaddingTop() + (lp.elementtop - 1)*mCellHeight + (lp.elementtop - 1)*mCellMarginV;
-                int childRight = childLeft + lp.elementwidth * mCellWidth + (lp.elementwidth - 1)*mCellMarginH;
-                int childBottom = childTop + lp.elementheight*mCellHeight + (lp.elementheight - 1)*mCellMarginV;
+                int childRight = childLeft + lp.elementwidth * mCellWidth + (lp.elementwidth + 1)*mCellMarginH;
+                int childBottom = childTop + lp.elementheight*mCellHeight + (lp.elementheight + 1)*mCellMarginV;
 
                 getChildAt(i).layout(childLeft, childTop, childRight, childBottom);
             }

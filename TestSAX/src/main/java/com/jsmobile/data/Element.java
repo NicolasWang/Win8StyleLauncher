@@ -16,6 +16,9 @@ public class Element {
     private String mId;
     private String mType;
     private boolean mCanFocus;
+    private boolean mDefaultFocus;
+    private boolean mAutoPlay;//only valid to video element
+    private String mLink;//valid to video,list and  image element
     private List<ElementData> mElementDatas; //order as index
 
     public Element() {
@@ -44,6 +47,30 @@ public class Element {
 
     public void setCanFocus(boolean mCanFocus) {
         this.mCanFocus = mCanFocus;
+    }
+
+    public boolean isDefaultFocus(){
+        return mDefaultFocus;
+    }
+
+    public void setDefaultFocus(boolean defaultFocus){
+        this.mDefaultFocus = defaultFocus;
+    }
+
+    public boolean isAutoPlay(){
+        return mAutoPlay;
+    }
+
+    public void setAutoPlay(boolean autoPlay){
+        this.mAutoPlay = autoPlay;
+    }
+
+    public String getLinkElementId(){
+        return mLink;
+    }
+
+    public void setLinkElementId(String id){
+        this.mLink = id;
     }
 
     public void addElementData(ElementData elementData){
