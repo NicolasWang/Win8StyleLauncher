@@ -1,6 +1,9 @@
 package com.jsmobile.widget;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -26,7 +29,6 @@ import java.util.Map;
  * Created by wangxin on 11/12/13.
  */
 public class ListElement extends BaseElement {
-    private ListView mListView;
     private BaseElement mLinkElement;
 
     //假设link的元素只能在list元素的左边或右边
@@ -40,14 +42,6 @@ public class ListElement extends BaseElement {
 
     @Override
     protected void initElement() {
-
-        mListView = new ListView(this.getContext());
-        ListView.LayoutParams param = new ListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        mListView.setLayoutParams(param);
-        Log.d("wangx", "listview: " + mListView);
-        mListView.setFocusable(false);
-
-        this.addView(mListView);
         this.setFocusable(false);
     }
 
@@ -59,122 +53,95 @@ public class ListElement extends BaseElement {
         mLinkElement = (BaseElement) parent.findViewWithTag(getLinkElementId());
         if(mLinkElement.getElementLeft() > this.getElementLeft()){
             linkPos = LINK_AT_RIGHT;
-            mListView.setPadding(ElementLayout.DEFAULT_ELEMENT_MARGIN, ElementLayout.DEFAULT_ELEMENT_MARGIN, 0, ElementLayout.DEFAULT_ELEMENT_MARGIN);
+            this.setPadding(ElementLayout.DEFAULT_ELEMENT_MARGIN, ElementLayout.DEFAULT_ELEMENT_MARGIN, 0, ElementLayout.DEFAULT_ELEMENT_MARGIN);
         } else if(mLinkElement.getElementLeft() < this.getElementLeft()){
+            Log.d("wangx", "link at left");
             linkPos = LINK_AT_LEFT;
-            mListView.setPadding(0, ElementLayout.DEFAULT_ELEMENT_MARGIN, ElementLayout.DEFAULT_ELEMENT_MARGIN, ElementLayout.DEFAULT_ELEMENT_MARGIN);
+            this.setPadding(0, ElementLayout.DEFAULT_ELEMENT_MARGIN, ElementLayout.DEFAULT_ELEMENT_MARGIN, ElementLayout.DEFAULT_ELEMENT_MARGIN);
         }
 
-        int itemHeight = ((this.getElementHeight()-1)*ElementLayout.DEFAULT_ELEMENT_MARGIN + this.getElementHeight()*ElementLayout.DEFAULT_CELL_HEIGHT) / this.getAllElementDatas().size();
-        mListView.setAdapter(new CustomAdapter(this.getContext(), this.getAllElementDatas(), itemHeight, linkPos));
-    }
+        LinearLayout container = new LinearLayout(this.getContext());
+        container.setOrientation(container.VERTICAL);
+        LinearLayout.LayoutParams cparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        container.setLayoutParams(cparams);
 
-    static class CustomAdapter extends BaseAdapter {
-        private Context mContext;
-        private List<ElementData> mDatas;
-        private int mItemHeight;
-        private int mLinkPos;
+        int count = this.getAllElementDatas().size();
+        for(int i = 0; i < count; i++){
+            LinearLayout ll = new LinearLayout(this.getContext());
+            ll.setOrientation(ll.HORIZONTAL);
+            ll.setGravity(Gravity.CENTER);
+            ll.setPadding(0, 6, 0, 6);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+            params.weight = 1;
+            ll.setLayoutParams(params);
 
-        public CustomAdapter(Context context, List<ElementData> elementDataList, int itemHeight, int linkPos){
-            mContext = context;
-            mDatas = elementDataList;
-            mItemHeight = itemHeight;
-            mLinkPos = linkPos;
-        }
+            ImageView imageView = new ImageView(this.getContext());
+            imageView.setVisibility(INVISIBLE);
+            imageView.setImageDrawable(new ColorDrawable(Color.RED));
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(ElementLayout.DEFAULT_ELEMENT_MARGIN, ViewGroup.LayoutParams.MATCH_PARENT));
+            imageView.setPadding(0, 25, 0, 25);
 
-        @Override
-        public int getCount() {
-            return mDatas.size();
-        }
+            TextView textView = new TextView(this.getContext());
+            textView.setText(getAllElementDatas().get(i).getElementDesc());
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        @Override
-        public Object getItem(int pos) {
-            return mDatas.get(pos);
-        }
-
-        @Override
-        public long getItemId(int pos) {
-            return pos;
-        }
-
-        @Override
-        public View getView(int pos, View convertView, ViewGroup viewGroup) {
-            if(convertView == null){
-                final ViewHolder holder = new ViewHolder();
-                LinearLayout ll = new LinearLayout(mContext);
-                ll.setOrientation(LinearLayout.HORIZONTAL);
-                ll.setGravity(Gravity.CENTER);
-                ListView.LayoutParams lparam = new ListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-                ll.setLayoutParams(lparam);
-                ll.setMinimumHeight(mItemHeight);
-
-                ImageView imageView = new ImageView(mContext);
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(ElementLayout.DEFAULT_ELEMENT_MARGIN, ViewGroup.LayoutParams.MATCH_PARENT));
-                imageView.setBackgroundResource(android.R.color.holo_red_light);
-                imageView.setVisibility(View.INVISIBLE);
-
-                TextView textView = new TextView(mContext);
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
-                param.weight = 1;
-                textView.setGravity(Gravity.CENTER);
-                textView.setLayoutParams(param);
-                textView.setText(mDatas.get(pos).getElementDesc());
-
-                if(mLinkPos == ListElement.LINK_AT_LEFT){
-                    ll.addView(imageView);
-                    ll.addView(textView);
-                } else if(mLinkPos == ListElement.LINK_AT_RIGHT){
-                    ll.addView(textView);
-                    ll.addView(imageView);
-                }
-
-                holder.mImageView = imageView;
-                holder.mTextView = textView;
-
-                ll.setTag(holder);
-                ll.setFocusable(false);
-                textView.setFocusable(true);
-//                textView.setBackgroundResource(R.drawable.imagefocus);
-                textView.setOnFocusChangeListener(new OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View view, boolean b) {
-                        Log.d("wangx", "textView onFocusChange " + b);
-                        if(b){
-                            holder.mImageView.setVisibility(View.VISIBLE);
-//                            holder.mTextView.setText("i am selected");
-                        } else {
-                            holder.mImageView.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
-//                Log.d("wangx", "convertView: " + convertView.getParent());
-
-                return ll;
-            } else {
-                final ViewHolder holder = (ViewHolder) convertView.getTag();
-                holder.mImageView.setVisibility(View.INVISIBLE);
-                holder.mTextView.setText(mDatas.get(pos).getElementDesc());
-                holder.mTextView.setFocusable(true);
-                holder.mTextView.setOnFocusChangeListener(new OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View view, boolean b) {
-                        if(b)holder.mImageView.setVisibility(View.VISIBLE);
-                    }
-                });
-                convertView.setFocusable(false);
-                Log.d("wangx", "convertView: " + convertView.getParent());
-                return convertView;
+            if(linkPos == LINK_AT_LEFT){
+                ll.addView(imageView);
+                ll.addView(textView);
+            } else if(linkPos == LINK_AT_RIGHT){
+                ll.addView(textView);
+                ll.addView(imageView);
             }
+
+            ll.setTag(getAllElementDatas().get(i).getContentUrl());
+
+            container.addView(ll);
+
+            textView.setTag(imageView);
+            textView.setFocusable(true);
+            textView.setClickable(true);
+            textView.setOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    TextView tv = (TextView) view;
+                    ImageView iv = (ImageView) view.getTag();
+
+                    if(b){
+                        iv.setVisibility(View.VISIBLE);
+                        LinearLayout parent = (LinearLayout) iv.getParent();
+                        notifyFocusChange((String) parent.getTag());
+                    } else {
+                        iv.setVisibility(View.INVISIBLE);
+                    }
+                }
+            });
         }
 
-        static class ViewHolder{
-            ImageView mImageView;
-            TextView mTextView;
-        }
+        this.addView(container);
+
+        notifyFocusChange(getAllElementDatas().get(0).getContentUrl());
     }
+
+
+
+
 
     public String getLinkElementId(){
         return mElement.getLinkElementId();
+    }
+
+    public BaseElement getLinkElement(){
+        return mLinkElement;
+    }
+
+    private void notifyFocusChange(String url){
+        BaseElement baseElement = getLinkElement();
+        if(baseElement instanceof ImageElement){
+            ((ImageElement)baseElement).notifyFocusChange(url);
+        } else if(baseElement instanceof VideoElement){
+
+        }
     }
 }

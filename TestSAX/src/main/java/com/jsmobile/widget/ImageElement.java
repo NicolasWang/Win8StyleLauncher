@@ -90,4 +90,8 @@ public class ImageElement extends BaseElement {
 //        this.setFocusable();
     }
 
+    public void notifyFocusChange(String url){
+        ImageLoader.getInstance().displayImage("http://192.168.8.97/" + url, mImage);
+    }
+
 }
