@@ -124,10 +124,6 @@ public class ListElement extends BaseElement {
         notifyFocusChange(getAllElementDatas().get(0).getContentUrl());
     }
 
-
-
-
-
     public String getLinkElementId(){
         return mElement.getLinkElementId();
     }

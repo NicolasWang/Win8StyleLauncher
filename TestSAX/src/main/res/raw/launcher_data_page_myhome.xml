@@ -22,7 +22,7 @@
 			auto: 当type为video时，包含此属性，表示是否自动切换视频播放，true自动切换、false手动切换
 			link: 表示image和video类型与list类型元素之间的关联关系
 		-->
-		<Element id="1_1" type="image" canfocus="true" >
+		<Element id="1_1" type="video" canfocus="true" >
 			<ElementDatas>
 				<ElementData order="0">
 					<!-- 元素名称，作为设计器中元素名称定义，此名称不会在Launcher界面中显示-->
@@ -43,7 +43,7 @@
 									比如： <ActionURL><![CDATA[http://douban.fm/music]]></ActionURL>
 									指定第三方服务器地址，直接写绝对URL路径即可，url中不包含“{xxx}”这样的部分，Launcher也不会做替换，就直接访问此绝对路径地址。
 						-->
-					<ContentURL><![CDATA[720p/assets/images/grid_01.png]]></ContentURL>
+					<ContentURL><![CDATA[http://192.168.8.97/video.ts]]></ContentURL>
 					<ElementAction>
 						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
 						<ActionType>3</ActionType>
@@ -51,33 +51,6 @@
 						<ActionURL><![CDATA[http://xxx/xxx.jsp]]></ActionURL>
 						<!--其他动作参数-->
 						<Params></Params>
-					</ElementAction>
-				</ElementData>
-			</ElementDatas>
-		</Element>
-		<Element id="1_2" type="image" canfocus="true" >
-			<ElementDatas>
-				<ElementData order="0">
-					<ElementName><![CDATA[02-消息中心]]></ElementName>
-					<ElementDesc><![CDATA[消息中心]]></ElementDesc>
-					<ContentURL><![CDATA[720p/assets/images/grid_02.png]]></ContentURL>
-					<ElementAction>
-						<!-- 必填 ，触发动作的业务类型 4:跳转其他应用  -->
-						<ActionType>4</ActionType>
-						<Params>
-							<Param name="ActionName">com.zte.action.SHOW_USER_MESSAGE</Param>
-						</Params>
-					</ElementAction>
-				</ElementData>
-			</ElementDatas>
-		</Element>
-		<Element id="1_3" type="image" canfocus="true" >
-			<ElementDatas>
-				<ElementData order="0">
-					<ElementName><![CDATA[03-营业厅]]></ElementName>
-					<ElementDesc><![CDATA[网上营业厅]]></ElementDesc>
-					<ContentURL><![CDATA[720p/assets/images/grid_03.png]]></ContentURL>
-					<ElementAction>
 					</ElementAction>
 				</ElementData>
 			</ElementDatas>
@@ -112,49 +85,6 @@
 							<Param name="PackageName">com.zte.newlauncher</Param>
 							<Param name="ClassName">com.zte.newlauncher.settings</Param>
 						</Params>
-					</ElementAction>
-				</ElementData>
-			</ElementDatas>
-		</Element>
-
-		<Element id="1_6" type="image" canfocus="true" >
-			<ElementDatas>
-				<ElementData order="0">
-					<ElementName><![CDATA[06-5person]]></ElementName>
-					<ElementDesc><![CDATA[]]></ElementDesc>
-					<ContentURL><![CDATA[720p/assets/images/grid_06.png]]></ContentURL>
-					<ElementAction>
-						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
-						<ActionType>3</ActionType>
-						<ActionURL><![CDATA[]]></ActionURL>
-					</ElementAction>
-				</ElementData>
-			</ElementDatas>
-		</Element>
-		<Element id="1_7" type="image" canfocus="true" >
-			<ElementDatas>
-				<ElementData order="0">
-					<ElementName><![CDATA[07-玩游戏]]></ElementName>
-					<ElementDesc><![CDATA[玩游戏\n游戏大厅]]></ElementDesc>
-					<ContentURL><![CDATA[720p/assets/images/grid_07.png]]></ContentURL>
-					<ElementAction>
-						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
-						<ActionType>3</ActionType>
-						<ActionURL><![CDATA[]]></ActionURL>
-					</ElementAction>
-				</ElementData>
-			</ElementDatas>
-		</Element>
-		<Element id="1_8" type="image" canfocus="true" >
-			<ElementDatas>
-				<ElementData order="0">
-					<ElementName><![CDATA[08-好声音]]></ElementName>
-					<ElementDesc><![CDATA[]]></ElementDesc>
-					<ContentURL><![CDATA[720p/assets/images/grid_08.png]]></ContentURL>
-					<ElementAction>
-						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
-						<ActionType>3</ActionType>
-						<ActionURL><![CDATA[]]></ActionURL>
 					</ElementAction>
 				</ElementData>
 			</ElementDatas>

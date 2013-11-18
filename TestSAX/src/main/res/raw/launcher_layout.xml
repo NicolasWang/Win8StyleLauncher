@@ -27,14 +27,9 @@
 			<!-- 页面元素列表 -->
 			<Elements>
 				<!-- 单元格列表，单元格是以1x1的单元格为基础定义。大小可以自由组合。 -->
-				<Element id="1_1" type="image" left="1" top="1" width="1" height="1" />
-				<Element id="1_2" type="image" left="2" top="1" width="1" height="1" />
-				<Element id="1_3" type="image" left="3" top="1" width="1" height="1" />
+				<Element id="1_1" type="video" left="1" top="1" width="3" height="2" />
 				<Element id="1_4" type="image" left="4" top="1" width="1" height="1" />
 				<Element id="1_5" type="image" left="5" top="1" width="1" height="1" />
-				<Element id="1_6" type="image" left="1" top="2" width="1" height="1" />
-				<Element id="1_7" type="image" left="2" top="2" width="1" height="1" />
-				<Element id="1_8" type="image" left="3" top="2" width="1" height="1" />
 				<Element id="1_9" type="image" left="4" top="2" width="1" height="1" />
 				<Element id="1_10" type="image" left="5" top="2" width="1" height="1" />
 				<Element id="1_11" type="image" left="1" top="3" width="1" height="1" />

@@ -24,11 +24,11 @@ public abstract class BaseElement extends ViewAnimator{
     }
 
     private void init(){
-        if(mElement.isCanFocus()){
-            this.setFocusable(true);
-            this.setClickable(true);
-//            this.setBackgroundResource(R.drawable.imagefocus);
-        }
+//        if(mElement.isCanFocus()){
+//            this.setFocusable(true);
+//            this.setClickable(true);
+////            this.setBackgroundResource(R.drawable.imagefocus);
+//        }
         ElementLayout.LayoutParams elp = new ElementLayout.LayoutParams(mElementLayoutInfo.width, mElementLayoutInfo.height);
         elp.elementleft = mElementLayoutInfo.left;
         elp.elementtop = mElementLayoutInfo.top;
