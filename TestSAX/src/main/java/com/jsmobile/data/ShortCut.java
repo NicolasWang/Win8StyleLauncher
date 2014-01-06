@@ -4,6 +4,7 @@ package com.jsmobile.data;
  * Created by wangxin on 10/29/13.
  */
 public class ShortCut {
+    public static final String NAV_TYPE_LOGO = "NAV_LOGO";
     public static final String NAV_TYPE_USER_LOGIN = "NAV_USER_LOGIN";
     public static final String NAV_TYPE_USER_MESSAGE = "NAV_USER_MESSAGE";
     public static final String NAV_TYPE_CLOCK_WEATHER = "NAV_CLOCK_WEATHER";

@@ -1,5 +1,7 @@
 package com.jsmobile.data;
 
+import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +21,10 @@ public class Element {
     private boolean mDefaultFocus;
     private boolean mAutoPlay;//only valid to video element
     private String mLink;//valid to video,list and  image element
-    private List<ElementData> mElementDatas; //order as index
+    private SparseArray<ElementData> mElementDatas; //order as index
 
     public Element() {
-        mElementDatas = new ArrayList<ElementData>();
+        mElementDatas = new SparseArray<ElementData>();
     }
 
     public String getId() {
@@ -74,14 +76,14 @@ public class Element {
     }
 
     public void addElementData(ElementData elementData){
-        mElementDatas.add(elementData.getOrder(), elementData);
+        mElementDatas.append(elementData.getOrder(), elementData);
     }
 
     public ElementData getElementData(int order){
         return mElementDatas.get(order);
     }
 
-    public List<ElementData> getAllElementDatas(){
+    public SparseArray<ElementData> getAllElementDatas(){
         return mElementDatas;
     }
 

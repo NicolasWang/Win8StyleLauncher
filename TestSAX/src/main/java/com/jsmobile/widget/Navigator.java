@@ -1,6 +1,7 @@
 package com.jsmobile.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -45,9 +46,9 @@ public class Navigator extends RelativeLayout {
 
 
         JsMobileApplication app = (JsMobileApplication) getContext().getApplicationContext();
-        int pageNum = app.getLauncherLayout().getMaxPageNum();
+        int pageNum = app.getLauncherLayout().getPageNum();
         for(int i = 0; i < pageNum; i++){
-            String id = app.getLauncherLayout().getIdByOrder(i);
+            String id = app.getLauncherLayout().getIdByOrder(i + 1); //TODO
             String str = app.getLauncherLayout().getPageLayoutInfo(id).getPageName();
             TextView tv = newText(str);
             tv.setTag(app.getLauncherLayout().getPageLayoutInfo(id).getPageId());
@@ -94,19 +95,47 @@ public class Navigator extends RelativeLayout {
     //向下滑动到
     public void focusDownToChild(String tag){
         mLinearLayout.findViewWithTag(tag).requestFocus();
+        mLinearLayout.findViewWithTag(tag).setBackgroundResource(R.drawable.nav_focus);
+        int count = mLinearLayout.getChildCount();
+        for(int i = 0; i < count; i++){
+            View view = mLinearLayout.getChildAt(i);
+            String str = (String) view.getTag();
+            if(!str.equalsIgnoreCase(tag)){
+                view.setBackgroundColor(Color.TRANSPARENT);
+            }
+        }
     }
 
     //水平滑动到
     public void focusMoveToChild(String tag){
         Log.d("wangx", "focusMoveToChild " + tag);
         mLinearLayout.findViewWithTag(tag).requestFocus();
+        mLinearLayout.findViewWithTag(tag).setBackgroundResource(R.drawable.nav_focus);
+        int count = mLinearLayout.getChildCount();
+        for(int i = 0; i < count; i++){
+            View view = mLinearLayout.getChildAt(i);
+            String str = (String) view.getTag();
+            if(!str.equalsIgnoreCase(tag)){
+                view.setBackgroundColor(Color.TRANSPARENT);
+            }
+        }
     }
 
     public void selectionMoveToChild(String previous, String now){
         //TODO
         Log.d("wangx", "selectionMoveToChild, previous=" + previous + ",now=" + now);
-        mLinearLayout.findViewWithTag(previous).setSelected(false);
-        mLinearLayout.findViewWithTag(now).setSelected(true);
+//        mLinearLayout.findViewWithTag(previous).setSelected(false);
+//        mLinearLayout.findViewWithTag(now).setSelected(true);
+        mLinearLayout.findViewWithTag(now).setBackgroundResource(R.drawable.nav_focus);
+
+        int count = mLinearLayout.getChildCount();
+        for(int i = 0; i < count; i++){
+            View view = mLinearLayout.getChildAt(i);
+            String tag = (String) view.getTag();
+            if(!tag.equalsIgnoreCase(now)){
+                view.setBackgroundColor(Color.TRANSPARENT);
+            }
+        }
     }
 
     private TextView newText(String str){
@@ -115,7 +144,6 @@ public class Navigator extends RelativeLayout {
         tv.setGravity(Gravity.CENTER);
         tv.setText(str);
         tv.setFocusable(true);
-        tv.setBackgroundResource(R.drawable.navfocus);
         tv.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -127,10 +155,9 @@ public class Navigator extends RelativeLayout {
             }
         });
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(150, 40); //TODO
 
-        lp.setMargins(10, 0, 10, 0);
+        lp.setMargins(15, 0, 15, 0);//TODO
 
         tv.setLayoutParams(lp);
 

@@ -43,7 +43,7 @@
 									比如： <ActionURL><![CDATA[http://douban.fm/music]]></ActionURL>
 									指定第三方服务器地址，直接写绝对URL路径即可，url中不包含“{xxx}”这样的部分，Launcher也不会做替换，就直接访问此绝对路径地址。
 						-->
-					<ContentURL><![CDATA[http://192.168.8.97/video.ts]]></ContentURL>
+					<ContentURL><![CDATA[http://10.0.6.83/video.ts]]></ContentURL>
 					<ElementAction>
 						<!-- 必填 ，触发动作的业务类型 3:打开指定网页  -->
 						<ActionType>3</ActionType>

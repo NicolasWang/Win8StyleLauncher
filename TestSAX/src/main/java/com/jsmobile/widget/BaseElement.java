@@ -1,6 +1,7 @@
 package com.jsmobile.widget;
 
 import android.content.Context;
+import android.util.SparseArray;
 import android.widget.ViewAnimator;
 
 import com.jsmobile.data.Element;
@@ -98,7 +99,7 @@ public abstract class BaseElement extends ViewAnimator{
         mElement.addElementData(elementData);
     }
 
-    public List<ElementData> getAllElementDatas(){
+    public SparseArray<ElementData> getAllElementDatas(){
         return mElement.getAllElementDatas();
     }
 }

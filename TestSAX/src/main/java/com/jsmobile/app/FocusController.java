@@ -59,7 +59,7 @@ public class FocusController {
                     PageView pageView = (PageView) mPanel.getFocusedChild();
                     if(pageView != null && pageView.getElementLayout() != null){
                         BaseElement element = (BaseElement) pageView.getElementLayout().getFocusedChild();
-                        if(element.getElementTop() + element.getElementHeight() == 4){//TODO
+                        if(isBottomBoundary(element, pageView)){//TODO
                             ((Navigator)mNavigator).focusDownToChild((String) pageView.getTag());
                             return true;
                         }
@@ -76,7 +76,7 @@ public class FocusController {
                 if(mRoot.getFocusedChild() == mPanel){
                     if(pageView != null && ((PageView)pageView).getElementLayout() != null){
                         BaseElement element = (BaseElement)((PageView)pageView).getElementLayout().getFocusedChild();
-                        if(element.getElementLeft() + element.getElementWidth() == 6){//TODO
+                        if(isRightBoundary(element, (PageView) pageView)){//TODO
                             ((PageContainer)mPanel).showNextPage();
                             ((Navigator)mNavigator).selectionMoveToChild((String) pageView.getTag(), (String) mPanel.getChildAt(nextIndex).getTag());
 
@@ -101,7 +101,7 @@ public class FocusController {
                 if(mRoot.getFocusedChild() == mPanel){
                     if(pageView != null && ((PageView)pageView).getElementLayout() != null){
                         BaseElement element = (BaseElement)((PageView)pageView).getElementLayout().getFocusedChild();
-                        if(element.getElementLeft() == 1){//TODO
+                        if(isLeftBoundary(element, (PageView) pageView)){//TODO
                             ((PageContainer)mPanel).showPreviousPage();
                             ((Navigator)mNavigator).selectionMoveToChild((String) pageView.getTag(), (String) mPanel.getChildAt(preIndex).getTag());
 
@@ -176,14 +176,32 @@ public class FocusController {
 
         if(resultArray[0] == null && resultArray[1] == null && resultArray[2] == null)return false;
 
-        //TODO   need to process resultArray elment as null
+        //TODO   need to process resultArray element as null
 
         if(curTop == 1){
-            elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            if(resultArray[0] != null){
+                elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            } else if(resultArray[1] != null){
+                elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            } else if(resultArray[2] != null){
+                elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            }
         } else if(curTop == 2){
-            elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            if(resultArray[1] != null){
+                elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            } else if(resultArray[0] != null){
+                elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            } else if(resultArray[2] != null){
+                elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            }
         } else if(curTop == 3){
-            elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            if(resultArray[2] != null){
+                elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            } else if(resultArray[1] != null){
+                elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            } else if(resultArray[0] != null){
+                elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            }
         }
 
         return true;
@@ -241,14 +259,184 @@ public class FocusController {
         if(resultArray[0] == null && resultArray[1] == null && resultArray[2] == null)return false;
 
         if(curTop == 1){
-            elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            if(resultArray[0] != null){
+                elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            } else if(resultArray[1] != null){
+                elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            } else if(resultArray[2] != null){
+                elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            }
         } else if(curTop == 2){
-            elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            if(resultArray[1] != null){
+                elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            } else if(resultArray[0] != null){
+                elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            } else if(resultArray[2] != null){
+                elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            }
         } else if(curTop == 3){
-            elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            if(resultArray[2] != null){
+                elementLayout.getElementByPos(resultArray[2].left, resultArray[2].top).requestFocus();
+            } else if(resultArray[1] != null){
+                elementLayout.getElementByPos(resultArray[1].left, resultArray[1].top).requestFocus();
+            } else if(resultArray[0] != null){
+                elementLayout.getElementByPos(resultArray[0].left, resultArray[0].top).requestFocus();
+            }
         }
 
         return true;
     }
+
+    public static boolean isRightBoundary(BaseElement element, PageView page){
+        int curTop = element.getElementTop();
+        int curLeft = element.getElementLeft();
+        int curWidth = element.getElementWidth();
+        int curHeight = element.getElementHeight();
+        String id = element.getElementId();
+
+        JsMobileApplication app = (JsMobileApplication) element.getContext().getApplicationContext();
+        LauncherLayout.PageLayoutInfo pageLayoutInfo = app.getLauncherLayout().getPageLayoutInfo((String) page.getTag());
+        LauncherPageData pageData = app.getLauncherData().getPageData((String) page.getTag());
+
+        Collection<LauncherLayout.ElementLayoutInfo> elementLayoutInfos = pageLayoutInfo.getAllElements().values();
+
+        Iterator<LauncherLayout.ElementLayoutInfo> iterator = elementLayoutInfos.iterator();
+
+        while (iterator.hasNext()){
+            LauncherLayout.ElementLayoutInfo elementLayoutInfo = iterator.next();
+            if(pageData.getElement(elementLayoutInfo.id).isCanFocus()){
+                if(isOverlapVertical(curTop, curHeight, elementLayoutInfo.top, elementLayoutInfo.height) &&
+                        (elementLayoutInfo.left >= (curLeft + curWidth))){
+                    if(elementLayoutInfo.id.equalsIgnoreCase(element.getElementId())){
+                        //can not happen
+                    } else {
+                        Log.d("wangxin", "isRightBoundary, " + String.format("cur left-top-width-height: %d-%d-%d-%d", curLeft, curTop, curWidth,curHeight) +
+                            String.format(", element left-top-width-height: %d-%d-%d-%d", elementLayoutInfo.left, elementLayoutInfo.top, elementLayoutInfo.width,
+                                    elementLayoutInfo.height));
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isLeftBoundary(BaseElement element, PageView page){
+        int curTop = element.getElementTop();
+        int curLeft = element.getElementLeft();
+        int curWidth = element.getElementWidth();
+        int curHeight = element.getElementHeight();
+        String id = element.getElementId();
+
+        JsMobileApplication app = (JsMobileApplication) element.getContext().getApplicationContext();
+        LauncherLayout.PageLayoutInfo pageLayoutInfo = app.getLauncherLayout().getPageLayoutInfo((String) page.getTag());
+        LauncherPageData pageData = app.getLauncherData().getPageData((String) page.getTag());
+
+        Collection<LauncherLayout.ElementLayoutInfo> elementLayoutInfos = pageLayoutInfo.getAllElements().values();
+
+        Iterator<LauncherLayout.ElementLayoutInfo> iterator = elementLayoutInfos.iterator();
+
+        while (iterator.hasNext()){
+            LauncherLayout.ElementLayoutInfo elementLayoutInfo = iterator.next();
+            if(pageData.getElement(elementLayoutInfo.id).isCanFocus()){
+                if(isOverlapVertical(curTop, curHeight, elementLayoutInfo.top, elementLayoutInfo.height) &&
+                        ((elementLayoutInfo.left + elementLayoutInfo.width) <= curLeft)){
+                    if(elementLayoutInfo.id.equalsIgnoreCase(element.getElementId())){
+                        //can not happen
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isTopBoundary(BaseElement element, PageView page){
+        int curTop = element.getElementTop();
+        int curLeft = element.getElementLeft();
+        int curWidth = element.getElementWidth();
+        int curHeight = element.getElementHeight();
+        String id = element.getElementId();
+
+        JsMobileApplication app = (JsMobileApplication) element.getContext().getApplicationContext();
+        LauncherLayout.PageLayoutInfo pageLayoutInfo = app.getLauncherLayout().getPageLayoutInfo((String) page.getTag());
+        LauncherPageData pageData = app.getLauncherData().getPageData((String) page.getTag());
+
+        Collection<LauncherLayout.ElementLayoutInfo> elementLayoutInfos = pageLayoutInfo.getAllElements().values();
+
+        Iterator<LauncherLayout.ElementLayoutInfo> iterator = elementLayoutInfos.iterator();
+
+        while (iterator.hasNext()){
+            LauncherLayout.ElementLayoutInfo elementLayoutInfo = iterator.next();
+            if(pageData.getElement(elementLayoutInfo.id).isCanFocus()){
+                if(isOverlapHorizontal(curLeft, curWidth, elementLayoutInfo.left, elementLayoutInfo.width) &&
+                        (elementLayoutInfo.top + elementLayoutInfo.height <= curTop)){
+                    if(elementLayoutInfo.id.equalsIgnoreCase(element.getElementId())){
+                        //can not happen
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isBottomBoundary(BaseElement element, PageView page){
+        int curTop = element.getElementTop();
+        int curLeft = element.getElementLeft();
+        int curWidth = element.getElementWidth();
+        int curHeight = element.getElementHeight();
+        String id = element.getElementId();
+
+        JsMobileApplication app = (JsMobileApplication) element.getContext().getApplicationContext();
+        LauncherLayout.PageLayoutInfo pageLayoutInfo = app.getLauncherLayout().getPageLayoutInfo((String) page.getTag());
+        LauncherPageData pageData = app.getLauncherData().getPageData((String) page.getTag());
+
+        Collection<LauncherLayout.ElementLayoutInfo> elementLayoutInfos = pageLayoutInfo.getAllElements().values();
+
+        Iterator<LauncherLayout.ElementLayoutInfo> iterator = elementLayoutInfos.iterator();
+
+        while (iterator.hasNext()){
+            LauncherLayout.ElementLayoutInfo elementLayoutInfo = iterator.next();
+            if(pageData.getElement(elementLayoutInfo.id).isCanFocus()){
+                if(isOverlapHorizontal(curLeft, curWidth, elementLayoutInfo.left, elementLayoutInfo.width) &&
+                        (elementLayoutInfo.top >= curTop + curHeight)){
+                    if(elementLayoutInfo.id.equalsIgnoreCase(element.getElementId())){
+                        //can not happen
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isOverlapVertical(int curTop, int curHeight, int top, int height){
+        if(curTop == top)return true;
+        if(curTop > top){
+            int bottom = top + height -1;
+            if(curTop >= top && curTop <= bottom)return true;
+        } else {
+            int curBottom = curTop + curHeight - 1;
+            if(top >= curTop && top <= curBottom)return true;
+        }
+        return false;
+    }
+
+    public static boolean isOverlapHorizontal(int curLeft, int curWidth, int left, int width){
+        if(curLeft == left)return true;
+        if(curLeft > left){
+            int right = left + width - 1;
+            if(curLeft >= left && curLeft <= right)return true;
+        } else {
+            int curRight = curLeft + curWidth - 1;
+            if(left >= curLeft && left <= curRight)return true;
+        }
+        return false;
+    }
+
 
 }

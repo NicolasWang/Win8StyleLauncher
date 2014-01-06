@@ -9,11 +9,6 @@ import org.xml.sax.Attributes;
 public class LauncherXMLParser extends XMLParser {
     private LauncherTemplateFileConfigs mConfigs;
 
-    public LauncherXMLParser() {
-        super();
-        mConfigs = LauncherTemplateFileConfigs.getInstance();
-    }
-
     public LauncherXMLParser(LauncherTemplateFileConfigs config){
         super();
         mConfigs = config;

@@ -1,5 +1,7 @@
 package com.jsmobile.data;
 
+import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +16,11 @@ public class LauncherLayout {
 
     private int mMaxPageNum;
     private Map<String, PageLayoutInfo> mAllPagesLayoutInfo; //id--[layout data]
-    private List<String> mAllPagesId;//order as index, order--id
+    private SparseArray<String> mAllPagesId;//order as index, order--id
 
     public LauncherLayout() {
         mAllPagesLayoutInfo = new HashMap<String, PageLayoutInfo>();
-        mAllPagesId = new ArrayList<String>();
+        mAllPagesId = new SparseArray<String>();
     }
 
     public CommonPageLayoutInfo getCommonLayoutInfo() {
@@ -41,6 +43,10 @@ public class LauncherLayout {
         return mMaxPageNum;
     }
 
+    public int getPageNum(){
+        return mAllPagesLayoutInfo.size();
+    }
+
     public void setMaxPageNum(int mMaxPageNum) {
         this.mMaxPageNum = mMaxPageNum;
     }
@@ -51,7 +57,7 @@ public class LauncherLayout {
 
     public void addPageLayoutInfo(PageLayoutInfo pageLayoutInfo){
         mAllPagesLayoutInfo.put(pageLayoutInfo.id, pageLayoutInfo);
-        mAllPagesId.add(pageLayoutInfo.order, pageLayoutInfo.id);
+        mAllPagesId.append(pageLayoutInfo.order, pageLayoutInfo.id);
     }
 
     public String getIdByOrder(int order){

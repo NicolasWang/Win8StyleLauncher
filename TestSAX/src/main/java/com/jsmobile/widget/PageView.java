@@ -11,6 +11,7 @@ import com.jsmobile.app.R;
  */
 public class PageView extends FrameLayout {
     private ElementLayout mElementLayout;
+    private ShortcutContainer mShortcuts;
 
     public PageView(Context context) {
         super(context);
@@ -23,6 +24,15 @@ public class PageView extends FrameLayout {
 
     public ElementLayout getElementLayout(){
         return mElementLayout;
+    }
+
+    public void addShortcutContainer(ShortcutContainer shortcutContainer){
+        this.addView(shortcutContainer);
+        mShortcuts = shortcutContainer;
+    }
+
+    public ShortcutContainer getShortcutContainer(){
+        return mShortcuts;
     }
 
 }

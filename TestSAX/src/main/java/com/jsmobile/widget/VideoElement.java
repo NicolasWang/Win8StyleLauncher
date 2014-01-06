@@ -52,6 +52,7 @@ public class VideoElement extends BaseElement implements MediaPlayer.OnVideoSize
         mSurfaceView.setVisibility(View.GONE);
 
         this.addView(mSurfaceView);
+        this.setFocusable(this.isCanFocus());
 
         mHandlerThread = new HandlerThread("mediaplayer", Thread.MIN_PRIORITY);
         mHandlerThread.start();
@@ -153,7 +154,9 @@ public class VideoElement extends BaseElement implements MediaPlayer.OnVideoSize
         if(visibility == View.GONE){
             releasePlayer();
         } else if(visibility == View.VISIBLE){
-            openPlayer(VideoElement.this.getElementData(0).getContentUrl());
+            if(this.getElementData(0) != null){
+                openPlayer(VideoElement.this.getElementData(0).getContentUrl());
+            }
         }
     }
 
@@ -197,7 +200,9 @@ public class VideoElement extends BaseElement implements MediaPlayer.OnVideoSize
         Log.d("wangx", String.format("surfaceChanged width=%d, heihgt=%d", VideoElement.this.getWidth(), VideoElement.this.getHeight()));
 
 //            if(isAutoPlay()){
-        openPlayer(VideoElement.this.getElementData(0).getContentUrl());
+        if(this.getElementData(0) != null){
+            openPlayer(VideoElement.this.getElementData(0).getContentUrl());
+        }
 //            }
     }
 

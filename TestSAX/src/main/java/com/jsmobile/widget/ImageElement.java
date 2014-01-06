@@ -2,6 +2,7 @@ package com.jsmobile.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jsmobile.app.JsMobileApplication;
 import com.jsmobile.data.Element;
 import com.jsmobile.data.ElementData;
 import com.jsmobile.data.LauncherLayout;
@@ -39,9 +41,6 @@ public class ImageElement extends BaseElement {
         mRoot.setLayoutParams(fparam);
 
         mImage = new ImageView(getContext());
-        mImage.setScaleType(ImageView.ScaleType.FIT_XY);//TODO
-        mImage.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT));//TODO
 
         mText = new TextView(getContext());
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -53,30 +52,66 @@ public class ImageElement extends BaseElement {
         mText.setTextSize(13);//TODO
 
         //TODO
-        ElementData data = this.getElementData(0);
-        String url = data.getContentUrl();
-        ImageLoader.getInstance().displayImage("http://192.168.8.97/" + url, mImage, new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String s, View view) {
+//        ElementData data = this.getElementData(0);
+//        String url = data.getContentUrl();
+//        ImageLoader.getInstance().displayImage("http://10.0.6.83/" + url, mImage, new ImageLoadingListener() {
+//            @Override
+//            public void onLoadingStarted(String s, View view) {
+//
+//            }
+//
+//            @Override
+//            public void onLoadingFailed(String s, View view, FailReason failReason) {
+//
+//            }
+//
+//            @Override
+//            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+//
+//            }
+//
+//            @Override
+//            public void onLoadingCancelled(String s, View view) {
+//
+//            }
+//        });
+//        mText.setText(data.getElementDesc());
+        ElementData data = getElementData(0);
+        if(data != null){
+            JsMobileApplication app = (JsMobileApplication) this.getContext().getApplicationContext();
+            final String url = app.getConfigPath() + data.getContentUrl();
+            Log.d("wangxin", "image url=" + url);
+            ImageLoader.getInstance().displayImage(url, mImage, new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String s, View view) {
 
-            }
+                }
 
-            @Override
-            public void onLoadingFailed(String s, View view, FailReason failReason) {
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
 
-            }
+                }
 
-            @Override
-            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
 
-            }
+                }
 
-            @Override
-            public void onLoadingCancelled(String s, View view) {
+                @Override
+                public void onLoadingCancelled(String s, View view) {
 
-            }
-        });
-        mText.setText(data.getElementDesc());
+                }
+            });
+
+            mText.setText(data.getElementDesc());
+        } else {
+            mImage.setImageResource(R.drawable.null_img);
+//            mText.setText("default");
+        }
+
+        mImage.setScaleType(ImageView.ScaleType.FIT_XY);//TODO
+        mImage.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT));//TODO
 
         mRoot.addView(mImage);
         mRoot.addView(mText);
@@ -91,7 +126,8 @@ public class ImageElement extends BaseElement {
     }
 
     public void notifyFocusChange(String url){
-        ImageLoader.getInstance().displayImage("http://192.168.8.97/" + url, mImage);
+        JsMobileApplication app = (JsMobileApplication) this.getContext().getApplicationContext();
+        ImageLoader.getInstance().displayImage(app.getConfigPath() + url, mImage);
     }
 
 }

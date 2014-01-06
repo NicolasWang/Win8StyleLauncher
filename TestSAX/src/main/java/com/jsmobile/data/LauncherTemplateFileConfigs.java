@@ -8,34 +8,34 @@ import java.util.Map;
  * Created by wangxin on 10/28/13.
  */
 public class LauncherTemplateFileConfigs {
-    static class LauncherLayoutFile{
-       String version;
-       String fileName;
+    public static class LauncherLayoutFile{
+       public String version;
+       public String fileName;
     }
 
-    static class LauncherCommonDataFile{
-        String version;
-        String fileName;
+    public static class LauncherCommonDataFile{
+        public String version;
+        public String fileName;
     }
 
-    static class LauncherPageFile{
-        String id;
-        String version;
-        String fileName;
+    public static class LauncherPageFile{
+        public String id;
+        public String version;
+        public String fileName;
     }
 
-    private static LauncherTemplateFileConfigs mConfigs;
-    private LauncherTemplateFileConfigs(){
+//    private static LauncherTemplateFileConfigs mConfigs;
+    public LauncherTemplateFileConfigs(){
         mLayoutFile = new LauncherLayoutFile();
         mCommonDataFile = new LauncherCommonDataFile();
         mPagesFile = new HashMap<String, LauncherPageFile>();
     }
-    public static LauncherTemplateFileConfigs getInstance(){
-        if(mConfigs == null){
-            mConfigs = new LauncherTemplateFileConfigs();
-        }
-        return mConfigs;
-    }
+//    public static LauncherTemplateFileConfigs getInstance(){
+//        if(mConfigs == null){
+//            mConfigs = new LauncherTemplateFileConfigs();
+//        }
+//        return mConfigs;
+//    }
 
     //deprecated?
     public LauncherLayoutFile getLayoutFile(){
@@ -43,7 +43,7 @@ public class LauncherTemplateFileConfigs {
     }
 
     //deprecated?
-    public LauncherCommonDataFile getmCommonDataFile(){
+    public LauncherCommonDataFile getCommonDataFile(){
         return mCommonDataFile;
     }
 
@@ -85,6 +85,10 @@ public class LauncherTemplateFileConfigs {
 
     public LauncherPageFile getLauncherPageFile(String id){
         return mPagesFile.get(id);
+    }
+
+    public Map<String, LauncherPageFile> getAllLauncherPages(){
+        return mPagesFile;
     }
 
     @Override

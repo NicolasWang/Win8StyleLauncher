@@ -132,7 +132,11 @@ public class LauncherPageDataXMLParser extends XMLParser {
         if(inTagShortcut && inTagName){
             mShortcut.setName(text);
         } else if(inTagActionType){
-            mElementAction.setActionType(Integer.valueOf(text));
+            if(text.equalsIgnoreCase("null")){
+                mElementAction.setActionType(ElementAction.ACTION_INVALID);
+            } else {
+                mElementAction.setActionType(Integer.valueOf(text));
+            }
         } else if(inTagActionURL){
             mElementAction.setActionUrl(text);
         } else if(inTagParam){
